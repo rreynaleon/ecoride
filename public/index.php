@@ -3,7 +3,7 @@
 echo "Hello, EcoRide !". "<br>";
 echo "La connection à la base de données a réussi !";
 
-// Inclus le fichier d'autoload de Composer
+// Inclus le fichier d'autoload de Composers
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // Constantes de configuration de l'application
@@ -41,3 +41,4 @@ $router = new Router();
 // Le routeur va analyser l'URI, trouver la route correspondante dans le fichier de configuration des routes, instancier le contrôleur et appeler l'action appropriée
 // Si la route n'existe pas, le routeur va rediriger vers la page d'erreur 404
 $router->handleRequest($_SERVER['REQUEST_URI']);
+var_dump($router);
