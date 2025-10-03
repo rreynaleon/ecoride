@@ -80,8 +80,8 @@ class RideRepository extends Repository
     public function save(Ride $ride): bool
     {
         try {
-            $query = "INSERT INTO ride (user_id, car_id, departure_location, departure_date, departure_time, arrival_location, arrival_date, arrival_time, places_available, price) 
-                      VALUES (:user_id, :car_id, :departure_location, :departure_date, :departure_time, :arrival_location, :arrival_date, :arrival_time, :places_available, :price)";
+            $query = "INSERT INTO ride (user_id, car_id, departure_location, departure_date, departure_time, arrival_location, arrival_date, arrival_time, places_available, price, description) 
+                      VALUES (:user_id, :car_id, :departure_location, :departure_date, :departure_time, :arrival_location, :arrival_date, :arrival_time, :places_available, :price, :description)";
             $statement = $this->pdo->prepare($query);
             $statement->bindValue(':user_id', $ride->getUserId(), \PDO::PARAM_INT);
             $statement->bindValue(':car_id', $ride->getCarId(), \PDO::PARAM_INT);
@@ -93,6 +93,7 @@ class RideRepository extends Repository
             $statement->bindValue(':arrival_time', $ride->getArrivalTime()->format('H:i:s'), \PDO::PARAM_STR);
             $statement->bindValue(':places_available', $ride->getPlacesAvailable(), \PDO::PARAM_INT);
             $statement->bindValue(':price', $ride->getPrice(), \PDO::PARAM_STR);
+            $statement->bindValue(':description', $ride->getDescription(), \PDO::PARAM_STR);
 
             return $statement->execute();
 
@@ -116,7 +117,8 @@ class RideRepository extends Repository
                         arrival_date = :arrival_date, 
                         arrival_time = :arrival_time, 
                         places_available = :places_available, 
-                        price = :price 
+                        price = :price, 
+                        description = :description
                       WHERE id = :id";
             $statement = $this->pdo->prepare($query);
             $statement->bindValue(':id', $ride->getId(), \PDO::PARAM_INT);
@@ -130,6 +132,7 @@ class RideRepository extends Repository
             $statement->bindValue(':arrival_time', $ride->getArrivalTime()->format('H:i:s'), \PDO::PARAM_STR);
             $statement->bindValue(':places_available', $ride->getPlacesAvailable(), \PDO::PARAM_INT);
             $statement->bindValue(':price', $ride->getPrice(), \PDO::PARAM_STR);
+            $statement->bindValue(':description', $ride->getDescription(), \PDO::PARAM_STR);
 
             return $statement->execute();
 
@@ -159,7 +162,7 @@ class RideRepository extends Repository
     public function search(array $criteria): array
     {
         try {
-            $query = "SELECT * FROM ride WHERE 1=1";
+            $query = "SELECT * FROM ride WHERE 1=1 LIMIT 10"; // Limite pour éviter de ramener trop de résultats
             $params = [];
 
             if (isset($criteria['departure_location'])) {
