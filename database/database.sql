@@ -97,6 +97,8 @@ CREATE TABLE booking (
     user_id INT NOT NULL,
     places_booked INT NOT NULL,
     booking_date DATETIME NOT NULL,
+    price_total DECIMAL(6,2) NOT NULL,
+    status ENUM('pending', 'confirmed', 'canceled') DEFAULT 'pending',
     CONSTRAINT pk_booking PRIMARY KEY(id),
     CONSTRAINT fk_booking_ride FOREIGN KEY(ride_id) REFERENCES ride(id),
     CONSTRAINT fk_booking_user FOREIGN KEY(user_id) REFERENCES user(id)
