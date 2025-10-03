@@ -25,6 +25,7 @@ class UserRepository extends Repository
             }
 
             return null;
+            
         } catch (\PDOException $e) {
             error_log("Erreur lors de la récupération de l'utilisateur : " . $e->getMessage());
             return null;

@@ -12,10 +12,10 @@ class Ride extends Entity
     protected ?int $carId = null;
     protected ?string $departureLocation = null;
     protected ?\DateTimeImmutable $departureDate = null;
-    protected ?string $departureTime = null;
+    protected ?\DateTimeImmutable $departureTime = null;
     protected ?string $arrivalLocation = null;
     protected ?\DateTimeImmutable $arrivalDate = null;
-    protected ?string $arrivalTime = null;
+    protected ?\DateTimeImmutable $arrivalTime = null;
     protected ?int $placesAvailable = null;
     protected ?float $price = null;
     protected ?string $description = null;
@@ -94,14 +94,20 @@ class Ride extends Entity
     }
 
     //$departureTime
-    public function getDepartureTime(): ?string
+    public function getDepartureTime(): ?\DateTimeImmutable
     {
         return $this->departureTime;
     }
 
-    public function setDepartureTime(?string $departureTime): self
+    public function setDepartureTime($departureTime): self
     {
-        $this->departureTime = $departureTime;
+        if($departureTime instanceof DateTimeImmutable) {
+            $this->departureTime = $departureTime;
+        } elseif(is_string($departureTime) && $departureTime !== null) {
+            $this->departureTime = new DateTimeImmutable($departureTime);
+        } else {
+            $this->departureTime = null;
+        }
         return $this;
     }
 
@@ -136,14 +142,20 @@ class Ride extends Entity
     }
 
     //$arrivalTime
-    public function getArrivalTime(): ?string
+    public function getArrivalTime(): ?\DateTimeImmutable
     {
         return $this->arrivalTime;
     }
 
-    public function setArrivalTime(?string $arrivalTime): self
+    public function setArrivalTime($arrivalTime): self
     {
-        $this->arrivalTime = $arrivalTime;
+        if($arrivalTime instanceof DateTimeImmutable) {
+            $this->arrivalTime = $arrivalTime;
+        } elseif(is_string($arrivalTime) && $arrivalTime !== null) {
+            $this->arrivalTime = new DateTimeImmutable($arrivalTime);
+        } else {
+            $this->arrivalTime = null;
+        }
         return $this;
     }
 
