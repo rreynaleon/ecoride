@@ -26,7 +26,7 @@ $mysql = MySql::getInstance();
 // J'appelle la méthode getPDO() pour obtenir l'instance de PDO, qui est la classe qui gère la connexion à la base de données
 $mysql->getPDO();
 // Je vérifie que l'instance de PDO est bien créée et que la connexion à la base de données est établie
-var_dump($mysql);
+// var_dump($mysql);
 
 
 // Routage des requêtes HTTP
@@ -41,4 +41,4 @@ $router = new Router();
 // Le routeur va analyser l'URI, trouver la route correspondante dans le fichier de configuration des routes, instancier le contrôleur et appeler l'action appropriée
 // Si la route n'existe pas, le routeur va rediriger vers la page d'erreur 404
 $router->handleRequest($_SERVER['REQUEST_URI']);
-var_dump($router);
+// var_dump($router);
