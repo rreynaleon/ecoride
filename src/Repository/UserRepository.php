@@ -76,6 +76,29 @@ class UserRepository extends Repository
         }
     }
 
+
+    // Récupérer un utilisateur par son pseudo
+    public function findByNickname(string $nickname): ?User
+    {
+        try {
+            $query = "SELECT * FROM user WHERE nickname = :nickname LIMIT 1";
+            $statement = $this->pdo->prepare($query);
+            $statement->bindValue(':nickname', $nickname);
+            $statement->execute();
+
+            $userData = $statement->fetch(\PDO::FETCH_ASSOC);
+
+            if ($userData) {
+                return User::createAndHydrate($userData);
+            }
+
+            return null;
+        } catch (\PDOException $e) {
+            error_log("Erreur lors de la récupération de l'utilisateur par pseudo : " . $e->getMessage());
+            return null;
+        }
+    }
+
     // Enregistrer un nouvel utilisateur
     public function save(User $user): bool
     {

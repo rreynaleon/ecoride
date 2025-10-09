@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-class PageController
+class PageController extends Controller
 {
     public function home()
     {
-        echo "Welcome to the EcoRide home page!";
+        $this->render("home");
     }
 }

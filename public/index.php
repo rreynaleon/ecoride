@@ -1,7 +1,7 @@
 <?php
 
-echo "Hello, EcoRide !". "<br>";
-echo "La connection à la base de données a réussi !";
+// echo "Hello, EcoRide !". "<br>";
+// echo "La connection à la base de données a réussi !";
 
 // Inclus le fichier d'autoload de Composers
 require_once __DIR__ . '/../vendor/autoload.php';

@@ -12,7 +12,7 @@ CREATE TABLE role (
 ) ENGINE=InnoDB;
 
 INSERT INTO role (role_name) VALUES ('admin');
-INSERT INTO role (role_name) VALUES ('user');
+INSERT INTO role (role_name) VALUES ('passenger');
 INSERT INTO role (role_name) VALUES ('driver');
 
 -- Table des utilisateurs
