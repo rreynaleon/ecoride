@@ -3,14 +3,15 @@
 namespace App\Controller;
 
 use DateTimeImmutable;
+use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Entity\UserRole;
 use App\Repository\UserRoleRepository;
+
 class AuthController extends Controller
 {
     public function register()
     {
-        $this->render("register");
-
         $errors = [];
 
         if (isset($_POST) && !empty($_POST)) {
@@ -23,7 +24,12 @@ class AuthController extends Controller
             $phone = trim($_POST['phone'] ?? '');
             $address = trim($_POST['address'] ?? '');
             $birthdate = $_POST['birthdate'] ?? null;
-            $roles = $_POST['roles'] ?? []; // tableau de rôles cochés
+            $profileImage = null;
+            $roles = $_POST['roles'] ?? []; // Récupérer les rôles sélectionnés
+
+            // Verification que les rôles sont sélectionnés
+            // var_dump($roles);
+            // die;
 
             // Validation des données du formulaire (côté serveur)
             if (strlen($name) < 2) $errors[] = "Le prénom doit faire au moins 2 caractères.";
@@ -41,7 +47,6 @@ class AuthController extends Controller
             if ($userRepo->findByNickname($nickname)) $errors[] = "Ce pseudo existe déjà.";
 
             // Gestion de la photo de profil (optionnel)
-            $profileImage = null;
             if (!empty($_FILES['profileImage']['name'])) {
                 $file = $_FILES['profileImage'];
                 if (strpos($file['type'], 'image/') !== 0) $errors[] = "Le fichier de profil doit être une image.";
@@ -55,7 +60,7 @@ class AuthController extends Controller
 
             // Si pas d’erreur, on crée l’utilisateur
             if (empty($errors)) {
-                $user = new \App\Entity\User();
+                $user = new User();
                 $user->setName($name);
                 $user->setLastname($lastname);
                 $user->setNickname($nickname);
@@ -69,17 +74,23 @@ class AuthController extends Controller
                 $userId = $userRepo->save($user); // Doit retourner l’ID de l’utilisateur
 
                 // Associer les rôles (ex : via UserRoleRepository)
-                $userRoleRepo = new \App\Repository\UserRoleRepository();
-                foreach ($roles as $roleId) {
-                    $userRoleRepo->addRoleToUser($userId, (int)$roleId);
+                $userRoleRepo = new UserRoleRepository();
+                if ($userId && is_int($userId)) {
+                    foreach ($roles as $roleId) {
+                        $userRoleRepo->addRoleToUser($userId, (int)$roleId);
+                    }
                 }
 
                 // Redirection ou message de succès
-                header('Location: /login');
+                header('Location: /home');
                 exit;
             }
         }
-        
+
+        // Affiche la vue après le traitement
+        $this->render("register", [
+            'errors' => $errors
+        ]);
     }
 
     public function login()

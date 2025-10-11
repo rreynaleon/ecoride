@@ -25,7 +25,6 @@ class UserRepository extends Repository
             }
 
             return null;
-            
         } catch (\PDOException $e) {
             error_log("Erreur lors de la récupération de l'utilisateur : " . $e->getMessage());
             return null;
@@ -100,7 +99,7 @@ class UserRepository extends Repository
     }
 
     // Enregistrer un nouvel utilisateur
-    public function save(User $user): bool
+    public function save(User $user): bool|int
     {
         try {
 
@@ -132,7 +131,11 @@ class UserRepository extends Repository
             $statement->bindValue(':birthdate', $user->getBirthdate() ? $user->getBirthdate()->format('Y-m-d') : null);
             $statement->bindValue(':profile_image', $user->getProfileImage());
 
-            return $statement->execute();
+            if ($statement->execute()) {
+                return (int)$this->pdo->lastInsertId();
+            }
+            return false;
+
         } catch (\PDOException $e) {
             error_log("Erreur lors de l'enregistrement de l'utilisateur : " . $e->getMessage());
             return false;

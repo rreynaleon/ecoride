@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +20,7 @@
         <label>Photo de profil : <input type="file" name="profileImage" accept="image/*"></label><br>
         <fieldset>
             <legend>Rôle(s) souhaité(s)</legend>
-            <input type="checkbox" name="roles[]" value="2" id="role_passenger" required>
+            <input type="checkbox" name="roles[]" value="2" id="role_passenger">
             <label for="role_passenger">Passager</label>
             <input type="checkbox" name="roles[]" value="3" id="role_driver">
             <label for="role_driver">Conducteur</label>

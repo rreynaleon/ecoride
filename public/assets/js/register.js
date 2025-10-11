@@ -31,7 +31,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
         }
 
         // Rôles
-        const roles = form.querySelectorAll('input[name="role_id"]:checked');
+        const roles = form.querySelectorAll('input[name="roles[]"]:checked');
         if (roles.length === 0) errors.push("Veuillez sélectionner au moins un rôle.");
 
         // Photo de profil (optionnel)
