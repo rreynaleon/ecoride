@@ -96,6 +96,16 @@ class AuthController extends Controller
     public function login()
     {
         $this->render("login");
+
+
+        if (isset($_POST) && !empty($_POST)) {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            var_dump($email, $password);
+            die;
+        }
+
     }
 
     public function logout()
