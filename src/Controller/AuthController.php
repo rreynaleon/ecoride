@@ -95,21 +95,67 @@ class AuthController extends Controller
 
     public function login()
     {
-        $this->render("login");
+        // Si l'utilisateur fait s'identifie via le formulaire login
+        if (isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['password']) && !empty($_POST['password'])) {
+            $email = trim($_POST['email'] ?? '');
+            $password = $_POST['password'] ?? '';
 
+            // var_dump($email, $password);
+            // die;
 
-        if (isset($_POST) && !empty($_POST)) {
-            $email = $_POST['email'];
-            $password = $_POST['password'];
+            // Je fait une instance de UserRepository pour aller chercher l'utilisateur en base via son email
+            $userRepo = new UserRepository();
+            $user = $userRepo->findByEmail($email);
 
-            var_dump($email, $password);
-            die;
+            // Je vérifie que l'utilisateur existe et que le mot de passe est correct
+            if ($user && password_verify($password, $user->getPassword())) {
+                // L'utilisateur est authentifié, je crée la session
+                $_SESSION['is_logged_in'] = true;
+                $_SESSION['user_id'] = $user->getId();
+                $_SESSION['user_name'] = $user->getName();
+                $_SESSION['user_lastname'] = $user->getLastname();
+                $_SESSION['user_nickname'] = $user->getNickname();
+                $_SESSION['user_email'] = $user->getEmail();
+                $_SESSION['profile_image'] = $user->getProfileImage();
+
+                // var_dump($_SESSION['is_logged_in'], $_SESSION['user_id'], $_SESSION['user_name'], $_SESSION['user_lastname'], $_SESSION['user_nickname'], $_SESSION['user_email'], $_SESSION['profile_image']);
+                // die;
+
+                // Je récupère les rôles de l'utilisateur
+                $userRoleRepo = new UserRoleRepository();
+                // Je stocke dans une variable les rôles de l'utilisateur sous la forme d'un tableau d'objets UserRole
+                $roles = $userRoleRepo->findRolesByUserId($user->getId());
+
+                // La function array_map applique permet de parcourir mon tableau d'obejts UserRole et de retourner un tableau avec uniquement les roleId
+                // J'obbtiens un tableau comme : [2, 3] si l'utilisateur a les rôles passager et conducteur
+                $_SESSION['user_roles'] = array_map(function (UserRole $role) {
+                    return $role->getRoleId();
+                }, $roles);
+
+                // var_dump($_SESSION['user_roles']);
+                // die;
+
+                // Rediriger vers l'accueil ou tableau de bord
+                header('Location: /home');
+                exit;
+            } else {
+                // Afficher un message d'erreur si les identifiants sont incorrects
+                $error = "Email ou mot de passe incorrect.";
+                $this->render("login", ['error' => $error]);
+                return;
+            }
+
         }
+
+        $this->render("login");
 
     }
 
     public function logout()
     {
-        $this->render("logout");
+        // Détruit la session et redirige vers la page de connexion
+        session_destroy();
+        header('Location: /home');
+        exit;
     }
 }

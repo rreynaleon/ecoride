@@ -133,7 +133,7 @@ class User extends Entity
         if($birthdate instanceof DateTimeImmutable) {
             $this->birthdate = $birthdate;
         } elseif(is_string($birthdate) && $birthdate !== null) {
-            $this->$birthdate = new DateTimeImmutable($birthdate);
+            $this->birthdate = new DateTimeImmutable($birthdate);
         } else {
             $this->birthdate = null;
         }

@@ -36,7 +36,7 @@ class UserRoleRepository extends Repository
     public function findRolesByUserId(int $userId): array
     {
         try {
-            $query = "SELECT * FROM user_role WHERE user_id = :user_id LiMIT 10";
+            $query = "SELECT * FROM user_role WHERE user_id = :user_id";
             $statement = $this->pdo->prepare($query);
             $statement->bindValue(':user_id', $userId, \PDO::PARAM_INT);
             $statement->execute();
@@ -47,8 +47,8 @@ class UserRoleRepository extends Repository
             foreach ($userRolesData as $userRole) {
                 $userRoles[] = UserRole::createAndHydrate($userRole);
             }
-
             return $userRoles;
+
         } catch (\PDOException $e) {
             error_log("Erreur lors de la récupération des rôles de l'utilisateur : " . $e->getMessage());
             return [];
