@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
-class PageController
+class PageController extends Controller
 {
+    // La méthode est très importante car elle affiche la view principale de l'app et elle passe les labels des rôles à la vue home.php
     public function home()
     {
-        echo "Welcome to the EcoRide home page!";
+        $this->render("home", [
+            'roleLabels' => $this->roleLabels
+        ]);
     }
 }
