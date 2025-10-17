@@ -5,89 +5,89 @@ return [
         "controller" => 'App\\Controller\\PageController',
         "action" => "home"
     ],
-    "/home" => [
+    "/home/" => [
         "controller" => 'App\\Controller\\PageController',
         "action" => "home"
     ],
-    "/about" => [
-        "controller" => 'App\\Controller\\PageController',
-        "action" => "about"
-    ],
-    "/contact" => [
-        "controller" => 'App\\Controller\\PageController',
-        "action" => "contact"
-    ],
-    "/register" => [
+    "/register/" => [
         "controller" => 'App\\Controller\\AuthController',
         "action" => "register"
     ],
-    "/login" => [
+    "/login/" => [
         "controller" => 'App\\Controller\\AuthController',
         "action" => "login"
     ],
-    "/logout" => [
+    "/logout/" => [
         "controller" => 'App\\Controller\\AuthController',
         "action" => "logout"
     ],
-    "/rides" => [
+    "/about/" => [
+        "controller" => 'App\\Controller\\PageController',
+        "action" => "about"
+    ],
+    "/contact/" => [
+        "controller" => 'App\\Controller\\PageController',
+        "action" => "contact"
+    ],
+    "/rides/" => [
         "controller" => 'App\\Controller\\RideController',
         "action" => "list"
     ],
-    "/ride/show" => [
+    "/ride/show/" => [
         "controller" => 'App\\Controller\\RideController',
         "action" => "show"
     ],
-    "/ride/create" => [
+    "/ride/create/" => [
         "controller" => 'App\\Controller\\RideController',
         "action" => "create"
     ],
-    "/ride/my" => [
+    "/ride/my/" => [
         "controller" => 'App\\Controller\\RideController',
         "action" => "myRides"
     ],
-    "/user/dashboard" => [
+    "/user/dashboard/" => [
         "controller" => 'App\\Controller\\UserController',
         "action" => "dashboard"
     ],
-    "/user/profile" => [
+    "/user/profile/" => [
         "controller" => 'App\\Controller\\UserController',
         "action" => "profile"
     ],
-    "/user/edit" => [
+    "/user/edit/" => [
         "controller" => 'App\\Controller\\UserController',
         "action" => "edit"
     ],
-    "/booking/my" => [
+    "/booking/my/" => [
         "controller" => 'App\\Controller\\BookingController',
         "action" => "myBookings"
     ],
-    "/review/my" => [
+    "/review/my/" => [
         "controller" => 'App\\Controller\\ReviewController',
         "action" => "myReviews"
     ],
     // Admin routes
-    "/admin/dashboard" => [
+    "/admin/dashboard/" => [
         "controller" => 'App\\Controller\\AdminController',
         "action" => "dashboard"
     ],
-    "/admin/users" => [
+    "/admin/users/" => [
         "controller" => 'App\\Controller\\AdminController',
         "action" => "users"
     ],
-    "/admin/rides" => [
+    "/admin/rides/" => [
         "controller" => 'App\\Controller\\AdminController',
         "action" => "rides"
     ],
-    "/admin/bookings" => [
+    "/admin/bookings/" => [
         "controller" => 'App\\Controller\\AdminController',
         "action" => "bookings"
     ],
-    "/admin/reviews" => [
+    "/admin/reviews/" => [
         "controller" => 'App\\Controller\\AdminController',
         "action" => "reviews"
     ],
-    "/admin/roles" => [
+    "/admin/roles/" => [
         "controller" => 'App\\Controller\\AdminController',
         "action" => "roles"
-    ],
+    ]
 ];
