@@ -10,7 +10,6 @@ class User extends Entity
     protected ?int $id = null;
     protected ?string $name = null;
     protected ?string $lastname = null;
-    protected ?string $nickname = null;
     protected ?string $email = null;
     protected ?string $password = null;
     protected ?string $phone = null;
@@ -59,18 +58,6 @@ class User extends Entity
     public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
-        return $this;
-    }
-
-    // $nickname
-    public function getNickname(): ?string
-    {
-        return $this->nickname;
-    }
-
-    public function setNickname(?string $nickname): self
-    {
-        $this->nickname = $nickname;
         return $this;
     }
 
