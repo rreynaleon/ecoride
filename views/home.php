@@ -23,9 +23,8 @@
                             $labels[] = $roleLabels[$roleId];
                         }
                     }
-                    echo htmlspecialchars(implode(', ', $labels));
+                    echo htmlspecialchars(implode(', ', $labels)).".";
                     ?>
-                    <?php echo ".<br>"; ?>
                 </p>
 
                 <form action="/logout" method="post" style="display:inline;">

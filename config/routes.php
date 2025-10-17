@@ -21,7 +21,7 @@ return [
         "controller" => 'App\\Controller\\AuthController',
         "action" => "logout"
     ],
-    "/about" => [
+    "/about/" => [
         "controller" => 'App\\Controller\\PageController',
         "action" => "about"
     ],
@@ -29,7 +29,7 @@ return [
         "controller" => 'App\\Controller\\PageController',
         "action" => "contact"
     ],
-    "/rides" => [
+    "/rides/" => [
         "controller" => 'App\\Controller\\RideController',
         "action" => "list"
     ],
@@ -53,7 +53,7 @@ return [
         "controller" => 'App\\Controller\\UserController',
         "action" => "profile"
     ],
-    "/user/edit" => [
+    "/user/edit/" => [
         "controller" => 'App\\Controller\\UserController',
         "action" => "edit"
     ],

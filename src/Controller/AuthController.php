@@ -136,7 +136,7 @@ class AuthController extends Controller
                 // die;
 
                 // Rediriger vers l'accueil ou tableau de bord
-                header('Location: /home');
+                header('Location: /user/dashboard');
                 exit;
             } else {
                 // Afficher un message d'erreur si les identifiants sont incorrects
